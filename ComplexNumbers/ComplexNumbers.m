@@ -40,11 +40,13 @@
 
 -(void) multipy: (ComplexNumbers *) CompNumb
 {
-    
+    [self setMod:[self mod]*[CompNumb mod]];
+    [self setArg:[self arg]+[CompNumb arg]];
 }
 
 -(void) divide: (ComplexNumbers *) CompNumb
 {
-    
+    [self setMod:[self mod]/[CompNumb mod]];
+    [self setArg:[self arg]-[CompNumb arg]];
 }
 @end
