@@ -13,16 +13,25 @@
 @synthesize mod;
 @synthesize arg;
 
--(void) initWithReal: (double)real andImaginary: (double)imaginary
+-(id) initWithReal: (double) real andImaginary: (double)imaginary
 {
-    re =real;
-    im = imaginary;
+    self = [super init];
+    [self setRe: real];
+    [self setIm: imaginary];
+
+    return self;
+    
 }
 
--(void) initWithModulus: (double)modulus andArgument: (double)argument
+
+-(id) initWithModulus: (double) modulus andArgument: (double)argument
 {
-    mod = modulus;
-    arg = argument;
+    self = [super init];
+    self.mod = modulus;
+    self.arg = argument;
+    
+    return self;
+    
 }
 
 
@@ -40,13 +49,24 @@
 
 -(void) multipy: (ComplexNumbers *) CompNumb
 {
-    [self setMod:[self mod]*[CompNumb mod]];
-    [self setArg:[self arg]+[CompNumb arg]];
+    double tempRe = [self re];
+    double tempIm = [self im];
+    
+    [self setRe:(tempRe*CompNumb.re-tempIm*CompNumb.im)];
+    [self setIm:(tempRe*CompNumb.im+tempIm*CompNumb.re)];
 }
 
 -(void) divide: (ComplexNumbers *) CompNumb
 {
-    [self setMod:[self mod]/[CompNumb mod]];
-    [self setArg:[self arg]-[CompNumb arg]];
+    double tempRe = [self re];
+    double tempIm = [self im];
+    
+    [self setRe:(tempRe*CompNumb.re+tempIm*CompNumb.im)/(CompNumb.re*CompNumb.re+CompNumb.im*CompNumb.im)];
+    [self setIm:(tempIm*CompNumb.re-tempRe*CompNumb.im)/(CompNumb.re*CompNumb.re+CompNumb.im*CompNumb.im)];
+}
+
+-(void) printAlgebraicWithPrecision
+{
+    NSLog(@"%.3f + j%.3f",[self re], [self im]);
 }
 @end

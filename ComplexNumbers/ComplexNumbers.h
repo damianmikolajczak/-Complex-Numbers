@@ -13,12 +13,15 @@
 @property double mod;
 @property double arg;
 
--(void) initWithReal: (double)real andImaginary: (double)imaginary;
--(void) initWithModulus: (double)modulus andArgument: (double)arg;
+
+-(id) initWithReal: (double)real andImaginary: (double)imaginary;
+-(id) initWithModulus: (double)modulus andArgument: (double)arg;
 
 -(void) add: (ComplexNumbers *) CompNumb;
 -(void) subtract: (ComplexNumbers *) CompNumb;
 -(void) multipy: (ComplexNumbers *) CompNumb;
 -(void) divide: (ComplexNumbers *) CompNumb;
+
+-(void) printAlgebraicWithPrecision;
 
 @end
