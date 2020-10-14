@@ -65,7 +65,21 @@
     [self setIm:(tempIm*CompNumb.re-tempRe*CompNumb.im)/(CompNumb.re*CompNumb.re+CompNumb.im*CompNumb.im)];
 }
 
--(void) printAlgebraicWithPrecision
+-(void) printAlgebraicWithPrecision: (NSUInteger) prec
+{
+    NSNumberFormatter *formatedRe= [[NSNumberFormatter alloc] init];
+    NSNumberFormatter *formatedIm= [[NSNumberFormatter alloc] init];
+    NSNumber *tempRe = [[NSNumber alloc] initWithDouble:[self re]];
+    NSNumber *tempIm = [[NSNumber alloc] initWithDouble:[self im]];
+    
+    [formatedRe setMaximumFractionDigits:(prec)];
+    [formatedRe setMaximumFractionDigits:(prec)];
+    
+    NSLog(@"(%@) + (%@)j",[formatedRe stringFromNumber: tempRe], [formatedIm stringFromNumber: tempIm]);
+}
+
+
+-(void) printRawAlgebraic
 {
     NSLog(@"%.3f + j%.3f",[self re], [self im]);
 }
