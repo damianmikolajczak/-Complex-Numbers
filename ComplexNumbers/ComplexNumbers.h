@@ -16,11 +16,14 @@
 
 -(id) initWithReal: (double) real andImaginary: (double) imaginary;
 -(id) initWithModulus: (double) modulus andArgument: (double) arg;
+-(void) calculateModulusAndArgument;
 
 -(void) add: (ComplexNumbers *) CompNumb;
 -(void) subtract: (ComplexNumbers *) CompNumb;
 -(void) multipy: (ComplexNumbers *) CompNumb;
 -(void) divide: (ComplexNumbers *) CompNumb;
+
+-(void) complexConjugate;
 
 -(void) printAlgebraicWithPrecision: (NSUInteger) prec;
 -(void) printRawAlgebraic;

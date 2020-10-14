@@ -20,7 +20,6 @@
     [self setIm: imaginary];
 
     return self;
-    
 }
 
 
@@ -31,20 +30,28 @@
     self.arg = argument;
     
     return self;
-    
+}
+
+-(void) calculateModulusAndArgument
+{
+    [self setMod:sqrt([self re]*[self re]+[self im]*[self im])];
+    [self setArg:atan([self im]/[self re])];
 }
 
 
+//--------------------------------------------------- MATH FUNCTION ---------------------------------------------------
 -(void) add: (ComplexNumbers *) CompNumb
 {
     [self setRe:[self re] + [CompNumb re]];
-    [self setIm:[self im] + [CompNumb im]] ;
+    [self setIm:[self im] + [CompNumb im]];
+    [self calculateModulusAndArgument];
 }
 
 -(void) subtract: (ComplexNumbers *) CompNumb
 {
     [self setRe:[self re] - [CompNumb re]];
-    [self setIm:[self im] - [CompNumb im]] ;
+    [self setIm:[self im] - [CompNumb im]];
+    [self calculateModulusAndArgument];
 }
 
 -(void) multipy: (ComplexNumbers *) CompNumb
@@ -54,6 +61,7 @@
     
     [self setRe:(tempRe*CompNumb.re-tempIm*CompNumb.im)];
     [self setIm:(tempRe*CompNumb.im+tempIm*CompNumb.re)];
+    [self calculateModulusAndArgument];
 }
 
 -(void) divide: (ComplexNumbers *) CompNumb
@@ -63,8 +71,18 @@
     
     [self setRe:(tempRe*CompNumb.re+tempIm*CompNumb.im)/(CompNumb.re*CompNumb.re+CompNumb.im*CompNumb.im)];
     [self setIm:(tempIm*CompNumb.re-tempRe*CompNumb.im)/(CompNumb.re*CompNumb.re+CompNumb.im*CompNumb.im)];
+    [self calculateModulusAndArgument];
 }
 
+
+//--------------------------------------------------- OPERATIONS ---------------------------------------------------
+-(void) complexConjugate
+{
+    [self setIm: (-1 * [self im])];
+    [self calculateModulusAndArgument];
+}
+
+//--------------------------------------------------- PRINT FUNCTION ---------------------------------------------------
 -(void) printAlgebraicWithPrecision: (NSUInteger) prec
 {
     NSNumberFormatter *formatedRe= [[NSNumberFormatter alloc] init];
@@ -77,7 +95,6 @@
     
     NSLog(@"(%@) + (%@)j",[formatedRe stringFromNumber: tempRe], [formatedIm stringFromNumber: tempIm]);
 }
-
 
 -(void) printRawAlgebraic
 {
